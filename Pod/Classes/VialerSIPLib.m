@@ -151,6 +151,9 @@ NSString * const VSLNotificationUserInfoErrorStatusMessageKey = @"VSLNotificatio
         if ([sipUser respondsToSelector:@selector(allowContactRewrite)]) {
             accountConfiguration.allowContactRewrite = sipUser.allowContactRewrite;
         }
+        if ([sipUser respondsToSelector:@selector(sipPushToken)]) {
+            accountConfiguration.sipPushToken = sipUser.sipPushToken;
+        }
 
         account = [[VSLAccount alloc] initWithCallManager:self.callManager];
  

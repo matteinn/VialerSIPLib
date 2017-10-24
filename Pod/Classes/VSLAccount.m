@@ -122,6 +122,9 @@ static NSString * const VSLAccountErrorDomain = @"VialerSIPLib.VSLAccount";
     acc_cfg.cred_info[0].data_type = PJSIP_CRED_DATA_PLAIN_PASSWD;
     acc_cfg.cred_info[0].data = accountConfiguration.sipPassword.pjString;
     acc_cfg.proxy_cnt = 0;
+    
+    const char* contact_uri_params = [[NSString stringWithFormat:@";pn-type=apple;pn-methods=\"INVITE\";pn-uri=apns:%@", accountConfiguration.sipPushToken] cStringUsingEncoding:NSUTF8StringEncoding];
+    acc_cfg.contact_uri_params = pj_str((char*)contact_uri_params);
 
     // If a proxy server is present on the account configuration add this to pjsua account configuration.
     if (accountConfiguration.sipProxyServer) {

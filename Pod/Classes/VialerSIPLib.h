@@ -187,6 +187,11 @@ typedef NS_ENUM(NSUInteger, VialerSIPLibErrors) {
  */
 @property (readonly, nonatomic) VSLContactRewriteMethod contactRewriteMethod;
 
+/**
+ *  The device's push token.
+ */
+@property (readonly, nonatomic) NSString *sipPushToken;
+
 @end // End of the SIPEnabledUser protocol
 
 @interface VialerSIPLib : NSObject

@@ -177,5 +177,10 @@ typedef NS_ENUM(NSUInteger, VSLContactRewriteMethod) {
 
 @property (nonatomic) VSLIceConfiguration * _Nullable iceConfiguration;
 
+/**
+ *  The device's push token.
+ */
+@property (strong, nonatomic) NSString *sipPushToken;
+
 @end
 
