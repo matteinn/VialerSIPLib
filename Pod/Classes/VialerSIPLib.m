@@ -110,6 +110,9 @@ NSString * const VSLNotificationUserInfoWindowSizeKey = @"VSLNotificationUserInf
         if ([sipUser respondsToSelector:@selector(sipStunType)]) {
             accountConfiguration.sipStunType = sipUser.sipStunType;
         }
+        if ([sipUser respondsToSelector:@selector(sipPushToken)]) {
+            accountConfiguration.sipPushToken = sipUser.sipPushToken;
+        }
 
         account = [[VSLAccount alloc] initWithCallManager:self.callManager];
  

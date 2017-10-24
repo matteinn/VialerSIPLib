@@ -100,6 +100,11 @@ typedef NS_ENUM(NSUInteger, VialerSIPLibErrors) {
  */
 @property (nonatomic) VSLStunUse mediaStunType;
 
+/**
+ *  The device's push token.
+ */
+@property (readonly, nonatomic) NSString *sipPushToken;
+
 @end
 
 @interface VialerSIPLib : NSObject

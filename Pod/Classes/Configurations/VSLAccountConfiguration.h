@@ -98,4 +98,9 @@ typedef NS_ENUM(NSUInteger, VSLStunUse) {
  */
 @property (nonatomic) VSLStunUse mediaStunType;
 
+/**
+ *  The device's push token.
+ */
+@property (strong, nonatomic) NSString *sipPushToken;
+
 @end
