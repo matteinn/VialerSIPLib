@@ -468,29 +468,37 @@ NSString * const VSLCallErrorDuringSetupCallNotification = @"VSLCallErrorDuringS
 
 #pragma mark - User actions
 - (void)answerWithCompletion:(void (^)(NSError *error))completion {
-    pj_status_t status;
 
     if (self.callId != PJSUA_INVALID_ID) {
-        pjsua_call_setting callSetting;
-        pjsua_call_setting_default(&callSetting);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-        if ([VSLEndpoint sharedEndpoint].endpointConfiguration.disableVideoSupport) {
-            callSetting.vid_cnt = 0;
-        }
+            pjsua_call_setting callSetting;
+            pjsua_call_setting_default(&callSetting);
 
-        status = pjsua_call_answer2((int)self.callId, &callSetting, PJSIP_SC_OK, NULL, NULL);
+            if ([VSLEndpoint sharedEndpoint].endpointConfiguration.disableVideoSupport) {
+                callSetting.vid_cnt = 0;
+            }
+            
+            pj_status_t status;
+            status = pjsua_call_answer2((int)self.callId, &callSetting, PJSIP_SC_OK, NULL, NULL);
 
-        if (status != PJ_SUCCESS) {
-            VSLLogError(@"Could not answer call PJSIP returned status code:%d", status);
-            NSError *error = [NSError VSLUnderlyingError:nil
-                                 localizedDescriptionKey:NSLocalizedString(@"Could not answer call", nil)
-                             localizedFailureReasonError:[NSString stringWithFormat:NSLocalizedString(@"PJSIP status code: %d", nil), status]
-                                             errorDomain:VSLCallErrorDomain
-                                               errorCode:VSLCallErrorCannotAnswerCall];
-            completion(error);
-        } else {
-            completion(nil);
-        }
+            if (status != PJ_SUCCESS) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    VSLLogError(@"Could not answer call PJSIP returned status code:%d", status);
+                    NSError *error = [NSError VSLUnderlyingError:nil
+                                         localizedDescriptionKey:NSLocalizedString(@"Could not answer call", nil)
+                                     localizedFailureReasonError:[NSString stringWithFormat:NSLocalizedString(@"PJSIP status code: %d", nil), status]
+                                                     errorDomain:VSLCallErrorDomain
+                                                       errorCode:VSLCallErrorCannotAnswerCall];
+                    completion(error);
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(nil);
+                });
+            }
+        });
+
 
     } else {
         VSLLogError(@"Could not answer call, PJSIP indicated callId(%ld) as invalid", (long)self.callId);
