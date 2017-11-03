@@ -655,8 +655,7 @@ static void releaseStoredTransport() {
         if (![self.callManager firstActiveCallForAccount:account]) {
             NSArray *calls = [self.callManager callsForAccount:account];
             if (calls.count == 0) {
-                NSError *error;
-                [account unregisterAccount:&error];
+                [account reregisterAccount];
             }
         }
     }
