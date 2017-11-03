@@ -707,8 +707,7 @@ static void onCallTransferStatus(pjsua_call_id callId, int statusCode, const pj_
         if (![self.callManager firstActiveCallForAccount:account]) {
             NSArray *calls = [self.callManager callsForAccount:account];
             if (calls.count == 0) {
-                NSError *error;
-                [account unregisterAccount:&error];
+                [account reregisterAccount];
             }
         }
     }
