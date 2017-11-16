@@ -9,7 +9,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.sipAuthRealm = @"*";
+        self.sipAuthRealm = @"asterisk";
         self.sipAuthScheme = @"digest";
         self.dropCallOnRegistrationFailure = NO;
         self.mediaStunType = VSLStunUseRetryOnFailure;

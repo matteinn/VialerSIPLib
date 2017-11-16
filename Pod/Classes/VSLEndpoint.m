@@ -419,15 +419,15 @@ static pjsip_transport *the_transport;
                        // iLBC
                        @"iLBC/8000/1":      @208,
                        // G711
-                       @"PCMU/8000/1":      @0,
+                       @"PCMU/8000/1":      @207,
                        // Speex 8 kHz
-                       @"speex/8000/1":     @0,
+                       @"speex/8000/1":     @206,
                        // Speex 16 kHz
-                       @"speex/16000/1":    @0,
+                       @"speex/16000/1":    @205,
                        // Speex 32 kHz
-                       @"speex/32000/1":    @0,
+                       @"speex/32000/1":    @204,
                        // GSM 8 kHZ
-                       @"GSM/8000/1":       @0,
+                       @"GSM/8000/1":       @203,
                        };
     }
     return (pj_uint8_t)[priorities[identifier] unsignedIntegerValue];
