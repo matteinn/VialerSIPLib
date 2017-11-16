@@ -36,7 +36,7 @@
         sipUri = [sipUri stringByPaddingToLength:[sipUri rangeOfString:@"@"].location withString:@"" startingAtIndex:0];
         sipUri = [NSString stringWithFormat:@"%@@%@", sipUri, domain];
     }
-    return sipUri.pjString;
+    return [sipUri stringByAppendingString:@";transport=tcp"].pjString;
 }
 
 @end
