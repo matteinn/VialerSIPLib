@@ -293,12 +293,8 @@ NSString * const VSLCallErrorDuringSetupCallNotification = @"VSLCallErrorDuringS
 }
 
 - (BOOL)transferToCall:(VSLCall *)secondCall {
-    NSError *error;
-    if (!self.onHold && ![self toggleHold:&error]) {
-        VSLLogError(@"Error holding call: %@", error);
-        return NO;
-    }
-    pj_status_t success = pjsua_call_xfer_replaces((pjsua_call_id)self.callId, (pjsua_call_id)secondCall.callId, 0, nil);
+    pj_str_t sipUri = [secondCall.numberToCall sipUriWithDomain:self.account.accountConfiguration.sipDomain];
+    pj_status_t success = pjsua_call_xfer((pjsua_call_id)self.callId, &sipUri, nil);
 
     if (success == PJ_SUCCESS) {
         self.transferStatus = VSLCallTransferStateInitialized;
