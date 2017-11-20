@@ -305,7 +305,9 @@ NSString * const VSLCallDeallocNotification = @"VSLCallDeallocNotification";
     self.remoteURI = [NSString stringWithPJString:callInfo.remote_info];
     if (self.remoteURI) {
         NSDictionary *callerInfo = [self getCallerInfoFromRemoteUri:self.remoteURI];
-        self.callerName = callerInfo[@"caller_name"];
+        if (!self.callerName || [callerInfo[@"caller_name"] length] > 0) {
+            self.callerName = callerInfo[@"caller_name"];
+        }
         self.callerNumber = callerInfo[@"caller_number"];
     }
 }
