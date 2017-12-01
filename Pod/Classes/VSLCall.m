@@ -387,7 +387,7 @@ NSString * const VSLCallErrorDuringSetupCallNotification = @"VSLCallErrorDuringS
         self.remoteURI = [NSString stringWithPJString:callInfo.remote_info];
         if (self.remoteURI) {
             NSDictionary *callerInfo = [self getCallerInfoFromRemoteUri:self.remoteURI];
-            if (!self.callerName || [callerInfo[@"caller_name"] length] > 0) {
+            if (self.callerName.length == 0 || [callerInfo[@"caller_name"] length] > 0) {
                 self.callerName = callerInfo[@"caller_name"];
             }
             self.callerNumber = callerInfo[@"caller_number"];
