@@ -759,6 +759,9 @@ NSString * const VSLCallErrorDuringSetupCallNotification = @"VSLCallErrorDuringS
         // Get the telephone part starting from the :
         semiColonRange = [callerHost rangeOfString:@":" options:NSBackwardsSearch];
         callerNumber = [callerHost substringFromIndex:semiColonRange.location + 1];
+        if (_incoming && callerNumber.length > 3 && !isdigit([callerNumber characterAtIndex:callerNumber.length - 4])) {
+            callerNumber = [callerNumber substringWithRange:NSMakeRange(callerNumber.length - 3, 3)];
+        }
     } else if ([[NSPredicate predicateWithFormat:@"SELF MATCHES '<.+\\\\>'"] evaluateWithObject:string]) {
         /**
          * This matches the remote_uri format of: <sip:42@test.nl>
