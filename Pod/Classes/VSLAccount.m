@@ -114,6 +114,10 @@ static NSString * const VSLAccountErrorDomain = @"VialerSIPLib.VSLAccount";
     acc_cfg.reg_timeout = VSLAccountRegistrationTimeoutInSeconds;
     acc_cfg.drop_calls_on_reg_fail = accountConfiguration.dropCallOnRegistrationFailure ? PJ_TRUE : PJ_FALSE;
 
+    acc_cfg.reg_retry_interval = 1;
+    acc_cfg.reg_first_retry_interval = 0;
+    acc_cfg.reg_retry_random_interval = 0;
+    
     // Add account information to the pjsua account configuration.
     acc_cfg.cred_count = 1;
     acc_cfg.cred_info[0].scheme = accountConfiguration.sipAuthScheme.pjString;
