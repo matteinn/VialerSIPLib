@@ -868,14 +868,14 @@ static void onIpChangeProgress(pjsua_ip_change_op op, pj_status_t status, const 
             reason = VSLCallTerminateReasonOriginatorCancel;
         }
         
-        if ([VSLEndpoint sharedEndpoint].missedCallBlock && reason != VSLCallTerminateReasonUnknown) {
+        if ([VSLEndpoint sharedEndpoint].missedCallBlock) {
             VSLCall *call = [[VSLEndpoint sharedEndpoint].callManager callWithCallId:call_id];;
-            if (call) {
+            if (call && call.isIncoming) {
                 call.terminateReason = reason;
                 VSLLogDebug(@"Call was terminated for reason: %@", VSLCallTerminateReasonString(reason));
                 [VSLEndpoint sharedEndpoint].missedCallBlock(call);
             } else {
-                VSLLogWarning(@"Received updated CallState(%@) for UNKNOWN call(id: %d)", VSLCallStateString(callInfo.state) , call_id);
+                VSLLogWarning(@"Received updated CallState(%@) for UNKNOWN or OUTGOING call(id: %d)", VSLCallStateString(callInfo.state) , call_id);
             }
         }
     }
