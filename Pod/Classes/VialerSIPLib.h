@@ -190,7 +190,7 @@ typedef NS_ENUM(NSUInteger, VialerSIPLibErrors) {
 /**
  *  The device's push token.
  */
-@property (readonly, nonatomic) NSString *sipPushToken;
+@property (readonly, nonatomic, nullable) NSString *sipPushToken;
 
 @end // End of the SIPEnabledUser protocol
 

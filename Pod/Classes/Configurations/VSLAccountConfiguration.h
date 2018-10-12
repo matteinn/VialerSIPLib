@@ -180,7 +180,7 @@ typedef NS_ENUM(NSUInteger, VSLContactRewriteMethod) {
 /**
  *  The device's push token.
  */
-@property (strong, nonatomic) NSString *sipPushToken;
+@property (strong, nonatomic, nullable) NSString *sipPushToken;
 
 @end
 
