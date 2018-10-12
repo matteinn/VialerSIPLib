@@ -468,7 +468,7 @@ NSString * const VSLCallErrorDuringSetupCallNotification = @"VSLCallErrorDuringS
 - (void)answerWithCompletion:(void (^)(NSError *error))completion {
 
     if (self.callId != PJSUA_INVALID_ID) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
 
             pjsua_call_setting callSetting;
             pjsua_call_setting_default(&callSetting);
