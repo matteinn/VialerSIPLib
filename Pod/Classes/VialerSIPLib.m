@@ -139,6 +139,10 @@ NSString * const VSLNotificationUserInfoErrorStatusMessageKey = @"VSLNotificatio
         if ([sipUser respondsToSelector:@selector(iceConfiguration)]) {
             accountConfiguration.iceConfiguration = sipUser.iceConfiguration;
         }
+        
+        if ([sipUser respondsToSelector:@selector(turnConfiguration)]) {
+            accountConfiguration.turnConfiguration = sipUser.turnConfiguration;
+        }
 
         if ([sipUser respondsToSelector:@selector(contactUseSrcPort)]) {
             accountConfiguration.contactUseSrcPort = sipUser.contactUseSrcPort;

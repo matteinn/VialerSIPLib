@@ -11,6 +11,7 @@
 #import "VSLCodecConfiguration.h"
 #import "VSLEndpointConfiguration.h"
 #import "VSLIceConfiguration.h"
+#import "VSLTurnConfiguration.h"
 #import "VSLStunConfiguration.h"
 #import "VSLTransportConfiguration.h"
 #import "CallKitProviderDelegate.h"
@@ -142,6 +143,11 @@ typedef NS_ENUM(NSUInteger, VialerSIPLibErrors) {
  *  The ICE Configuration that should be used.
  */
 @property (readonly, nonatomic) VSLIceConfiguration * _Nullable iceConfiguration;
+
+/**
+ *  The TURN Configuration that should be used.
+ */
+@property (readonly, nonatomic) VSLTurnConfiguration * _Nullable turnConfiguration;
 
 /**
  * Specify if source TCP port should be used as the initial Contact
