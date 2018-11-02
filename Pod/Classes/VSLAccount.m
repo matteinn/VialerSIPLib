@@ -180,7 +180,7 @@ static NSString * const VSLAccountErrorDomain = @"VialerSIPLib.VSLAccount";
     }
     
     if (accountConfiguration.iceConfiguration) {
-        acc_cfg.ice_cfg_use = PJSUA_ICE_CONFIG_USE_DEFAULT;
+        acc_cfg.ice_cfg_use = PJSUA_ICE_CONFIG_USE_CUSTOM;
         acc_cfg.ice_cfg.enable_ice = accountConfiguration.iceConfiguration.enableIce;
     }
 
